@@ -43,7 +43,7 @@ body {
   display: flex;
   align-items:flex-start;
   justify-content:center;
-  width: calc(100vw - 240px)  !important;
+  max-width: 500px;
   height: 500px;
   margin-top: 40px;
   margin-bottom: 40px;
