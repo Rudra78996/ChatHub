@@ -7,32 +7,31 @@ import { PeerContext } from "../helper/peer";
 import { Button } from "@mui/material";
 
 
-const Home = () => {
+function Home() {
 
-  const {user} = useContext(PeerContext);
-
-
-  useEffect(()=>{
-    console.log(user);
-  }, [user])
-  let [myStream, setMyStream] = useState(null);
-
-  
-  let userStream = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    setMyStream(stream);
-  };
-
-  useEffect(() => {
-    userStream();
-  }, [userStream]);
+  // const { user } = useContext(PeerContext);
 
 
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
+  // let [myStream, setMyStream] = useState(null);
 
 
-  const joinRoomHandler = () =>{
-    
-  }
+  // let userStream = async () => {
+  //   const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+  //   setMyStream(stream);
+  // };
+
+  // useEffect(() => {
+  //   userStream();
+  // }, [userStream]);
+
+
+
+
+  // const joinRoomHandler = () => {
+  // };
 
 
 
@@ -46,6 +45,7 @@ const Home = () => {
           </h1>
         </div>
         <div className="container">
+          
           <nav className="navbar navbar-expand-lg navbar-custom bg-body-tertiary">
             <div className="container-fluid">
               <a className="navbar-brand" href="#">
@@ -108,6 +108,7 @@ const Home = () => {
                   </li>
                 </ul>
                 <form className="d-flex" role="search">
+                
                   <button className="btn btn-outline-success" type="submit">
                     Login
                   </button>
@@ -115,15 +116,22 @@ const Home = () => {
               </div>
             </div>
           </nav>
+          <div className="transition">
+              <p className="para1"><h2>Welcome to ChatHub!!</h2></p>
+              <p className="para2"><h2>Anonymous video chat platform</h2></p>
+            </div>
+          <div className="entervc">
+            <button className="vcbtn">Enter video chat</button>
+          </div>
         </div>
       </header>
-      <main className="container-custom">
+      {/* <main className="container-custom">
         <Button variant="contained" onClick={joinRoomHandler}>Connect</Button>
         <ReactPlayer url={myStream} playing />
         <ReactPlayer url={myStream} playing />
-      </main>
+      </main> */}
     </div>
   );
-};
+}
 
 export default Home;
