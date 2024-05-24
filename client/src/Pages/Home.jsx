@@ -1,39 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React  from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./Home.css";
-import ReactPlayer from "react-player";
-import { PeerContext } from "../helper/peer";
-import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 
 function Home() {
-
-  // const { user } = useContext(PeerContext);
-
-
-  // useEffect(() => {
-  //   console.log(user);
-  // }, [user]);
-  // let [myStream, setMyStream] = useState(null);
-
-
-  // let userStream = async () => {
-  //   const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-  //   setMyStream(stream);
-  // };
-
-  // useEffect(() => {
-  //   userStream();
-  // }, [userStream]);
-
-
-
-
-  // const joinRoomHandler = () => {
-  // };
-
-
 
   return (
     <div>
@@ -121,15 +93,12 @@ function Home() {
               <p className="para2"><h2>Anonymous video chat platform</h2></p>
             </div>
           <div className="entervc">
-            <button className="vcbtn">Enter video chat</button>
+            <button className="vcbtn"><Link to="/room" style={{
+              textDecoration: "none"
+              }}>Enter video chat</Link></button>
           </div>
         </div>
       </header>
-      {/* <main className="container-custom">
-        <Button variant="contained" onClick={joinRoomHandler}>Connect</Button>
-        <ReactPlayer url={myStream} playing />
-        <ReactPlayer url={myStream} playing />
-      </main> */}
     </div>
   );
 }

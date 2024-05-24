@@ -1,15 +1,17 @@
 import React from "react";
 import Home from "./Pages/Home";
+import Room from "./Pages/Room";
 import { SocketProvider } from "./helper/socket";
-import { PeerProvider } from "./helper/peer";
+import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <PeerProvider>
-      <SocketProvider>
-        <Home />
-      </SocketProvider>
-    </PeerProvider>
+    <SocketProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/room" element={<Room />} />
+      </Routes>
+    </SocketProvider>
   );
 };
 
