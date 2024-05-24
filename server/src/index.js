@@ -7,6 +7,9 @@ const server = http.createServer(app);
 const io = new Server(server, {
     cors:true
 });
+app.get("/", (req, res)=>{
+    res.json({"status":"server working"});
+})
 
 const port = 8080 || process.env.PORT;
 
