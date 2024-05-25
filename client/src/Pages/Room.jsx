@@ -151,6 +151,7 @@ const Room = () => {
   useEffect(() => {
     if (PeerService.peer) {
       PeerService.peer.addEventListener("track", (ev) => {
+        console.log(ev.streams[0]);
         const remoteStream = ev.streams[0];
         console.log("GOT TRACKS!!");
         setRemoteStream(remoteStream);
