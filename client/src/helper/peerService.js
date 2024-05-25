@@ -3,14 +3,12 @@ class PeerProvider {
     if (!this.peer) {
       this.peer = new RTCPeerConnection({
         iceServers: [
-          [
-            { urls: "stun:freeturn.net:5349" },
-            {
-              urls: "turns:freeturn.tel:5349",
-              username: "free",
-              credential: "free",
-            },
-          ],
+          { urls: "stun:freeturn.net:5349" },
+          {
+            urls: "turns:freeturn.tel:5349",
+            username: "free",
+            credential: "free",
+          },
         ],
       });
     }
