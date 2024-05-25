@@ -193,6 +193,7 @@ const Room = () => {
         </>
       )}
       </div>
+      <button onClick={sendStreams}>Send my stream</button>
     </div>
   );
 };
