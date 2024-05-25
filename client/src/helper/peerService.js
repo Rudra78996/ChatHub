@@ -1,15 +1,31 @@
 class PeerProvider {
    constructor() {
     if (!this.peer) {
-      fetch("https://chat-hub.metered.live/api/v1/turn/credentials?apiKey=3f9ef4bcde68fb2bb9eed042698a5b1f9f8f").then((res)=>{
-        return res.json();
-      }).then((data)=>{
         this.peer = new RTCPeerConnection({
-          iceServers: data 
+          iceServers: [
+            {
+              url: 'stun:global.stun.twilio.com:3478',
+              urls: 'stun:global.stun.twilio.com:3478'
+            },
+            {
+              url: 'turn:global.turn.twilio.com:3478?transport=udp',
+              username: 'f871480bbe6d29cfe47cf21f464e422956f2268cb81504306effc2697e235e5f',
+              urls: 'turn:global.turn.twilio.com:3478?transport=udp',
+              credential: 'XHGrd//cXVq9ujIiBkYyr85DYaa8EgETWFn+N6Ow4oA='
+            },
+            {
+              url: 'turn:global.turn.twilio.com:3478?transport=tcp',
+              username: 'f871480bbe6d29cfe47cf21f464e422956f2268cb81504306effc2697e235e5f',
+              urls: 'turn:global.turn.twilio.com:3478?transport=tcp',
+              credential: 'XHGrd//cXVq9ujIiBkYyr85DYaa8EgETWFn+N6Ow4oA='
+            },
+            {
+              url: 'turn:global.turn.twilio.com:443?transport=tcp',
+              username: 'f871480bbe6d29cfe47cf21f464e422956f2268cb81504306effc2697e235e5f',
+              urls: 'turn:global.turn.twilio.com:443?transport=tcp',
+              credential: 'XHGrd//cXVq9ujIiBkYyr85DYaa8EgETWFn+N6Ow4oA='
+            }]
         });
-      }).catch((err)=>{
-        console.log(err);
-      })
     }
   }
 

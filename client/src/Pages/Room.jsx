@@ -85,6 +85,22 @@ const Room = () => {
       PeerService.peer.removeEventListener("negotiationneeded", handleNegoNeeded);
     };
   }, [handleNegoNeeded]);
+  
+  useEffect(()=>{
+    PeerService.peer.addEventListener('icecandidate', event => {
+      if (event.candidate) {
+        console.log(`New ICE candidate: ${event.candidate.candidate}`);
+      } else {
+        console.log('All ICE candidates have been sent.');
+      }
+    });
+  }, []);
+
+  useEffect(()=>{
+    PeerService.peer.addEventListener('icecandidateerror', event => {
+      console.error(`ICE candidate error: ${event.errorText}`);
+    });
+  }, []);
 
   useEffect(()=>{
     PeerService.peer.addEventListener('connectionstatechange', (event) => {
