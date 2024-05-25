@@ -135,7 +135,7 @@ const Room = () => {
     if (PeerService.peer) {
       PeerService.peer.addEventListener("track", (ev) => {
         const remoteStream = ev.streams[0];
-        // console.log("GOT TRACKS!!");
+        console.log("GOT TRACKS!!");
         setRemoteStream(remoteStream);
       });
     }
