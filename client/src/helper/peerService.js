@@ -1,31 +1,32 @@
 class PeerProvider {
-   constructor() {
+  constructor() {
     if (!this.peer) {
-        this.peer = new RTCPeerConnection({
-          iceServers: [
-            {
-              url: 'stun:global.stun.twilio.com:3478',
-              urls: 'stun:global.stun.twilio.com:3478'
-            },
-            {
-              url: 'turn:global.turn.twilio.com:3478?transport=udp',
-              username: 'f871480bbe6d29cfe47cf21f464e422956f2268cb81504306effc2697e235e5f',
-              urls: 'turn:global.turn.twilio.com:3478?transport=udp',
-              credential: 'XHGrd//cXVq9ujIiBkYyr85DYaa8EgETWFn+N6Ow4oA='
-            },
-            {
-              url: 'turn:global.turn.twilio.com:3478?transport=tcp',
-              username: 'f871480bbe6d29cfe47cf21f464e422956f2268cb81504306effc2697e235e5f',
-              urls: 'turn:global.turn.twilio.com:3478?transport=tcp',
-              credential: 'XHGrd//cXVq9ujIiBkYyr85DYaa8EgETWFn+N6Ow4oA='
-            },
-            {
-              url: 'turn:global.turn.twilio.com:443?transport=tcp',
-              username: 'f871480bbe6d29cfe47cf21f464e422956f2268cb81504306effc2697e235e5f',
-              urls: 'turn:global.turn.twilio.com:443?transport=tcp',
-              credential: 'XHGrd//cXVq9ujIiBkYyr85DYaa8EgETWFn+N6Ow4oA='
-            }]
-        });
+      this.peer = new RTCPeerConnection({
+        iceServers: [
+          {
+            url: 'stun:global.stun.twilio.com:3478',
+            urls: 'stun:global.stun.twilio.com:3478'
+          },
+          {
+            url: 'turn:global.turn.twilio.com:3478?transport=udp',
+            username: '53bcad5d5915da28c9d60b923bbae352ed4be76754c1075b29847389138b3ee9',
+            urls: 'turn:global.turn.twilio.com:3478?transport=udp',
+            credential: 'NCCb9R6NUi0/ms0HwiQ3OpKscc3Pbe1YSEXVCe8JQLM='
+          },
+          {
+            url: 'turn:global.turn.twilio.com:3478?transport=tcp',
+            username: '53bcad5d5915da28c9d60b923bbae352ed4be76754c1075b29847389138b3ee9',
+            urls: 'turn:global.turn.twilio.com:3478?transport=tcp',
+            credential: 'NCCb9R6NUi0/ms0HwiQ3OpKscc3Pbe1YSEXVCe8JQLM='
+          },
+          {
+            url: 'turn:global.turn.twilio.com:443?transport=tcp',
+            username: '53bcad5d5915da28c9d60b923bbae352ed4be76754c1075b29847389138b3ee9',
+            urls: 'turn:global.turn.twilio.com:443?transport=tcp',
+            credential: 'NCCb9R6NUi0/ms0HwiQ3OpKscc3Pbe1YSEXVCe8JQLM='
+          }
+        ],
+      });
     }
   }
 
