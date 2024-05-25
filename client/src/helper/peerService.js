@@ -6,6 +6,15 @@ class PeerProvider {
           {
             urls: "stun:stun.l.google.com:19302",
           },
+          { urls: "stun:stun1.l.google.com:19302" },
+          {
+            urls: "stun:stun.stunprotocol.org",
+          },
+          {
+            urls: "turn:numb.viagenie.ca",
+            credential: "muazkh",
+            username: "webrtc@live.com",
+          },
           {
             urls: "turn:global.relay.metered.ca:80",
             username: "29123a95a7760d9589bd2fe9",
@@ -26,7 +35,7 @@ class PeerProvider {
             username: "29123a95a7760d9589bd2fe9",
             credential: "+s3gnlXw0IitKA5n",
           },
-      ],
+        ],
       });
     }
   }

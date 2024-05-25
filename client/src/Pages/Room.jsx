@@ -89,22 +89,23 @@ const Room = () => {
   useEffect(()=>{
     PeerService.peer.addEventListener('connectionstatechange', (event) => {
       switch(PeerService.peer.connectionState) {
-          // case 'connected':
-          //     console.log('The connection has become successfully established.');
-          //     break;
-          // case 'disconnected':
-          //     setFoundMatch(false);
-          //     setRemoteStream(null);
-          //     break;
-          // case 'failed':
-          //     console.log('The connection has failed.');
-          //     break;
-          // case 'closed':
-          //     console.log('The connection has been closed.');
-          //     break;
-          // default:
-          //     console.log(`Connection state changed to: ${PeerService.peer.connectionState}`);
-          //     break;
+          case 'connected':
+              console.log('The connection has become successfully established.');
+              break;
+          case 'disconnected':
+            console.log('disconnected');
+              // setFoundMatch(false);
+              // setRemoteStream(null);
+              break;
+          case 'failed':
+              console.log('The connection has failed.');
+              break;
+          case 'closed':
+              console.log('The connection has been closed.');
+              break;
+          default:
+              console.log(`Connection state changed to: ${PeerService.peer.connectionState}`);
+              break;
       }
   });
   }, [])
