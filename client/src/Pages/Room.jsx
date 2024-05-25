@@ -92,10 +92,10 @@ const Room = () => {
           // case 'connected':
           //     console.log('The connection has become successfully established.');
           //     break;
-          case 'disconnected':
-              setFoundMatch(false);
-              setRemoteStream(null);
-              break;
+          // case 'disconnected':
+          //     setFoundMatch(false);
+          //     setRemoteStream(null);
+          //     break;
           // case 'failed':
           //     console.log('The connection has failed.');
           //     break;
