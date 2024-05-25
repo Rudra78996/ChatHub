@@ -3,13 +3,30 @@ class PeerProvider {
     if (!this.peer) {
       this.peer = new RTCPeerConnection({
         iceServers: [
-          { urls: "stun:freeturn.net:5349" },
           {
-            urls: "turns:freeturn.tel:5349",
-            username: "free",
-            credential: "free",
+            urls: "stun:stun.relay.metered.ca:80",
           },
-        ],
+          {
+            urls: "turn:global.relay.metered.ca:80",
+            username: "29123a95a7760d9589bd2fe9",
+            credential: "+s3gnlXw0IitKA5n",
+          },
+          {
+            urls: "turn:global.relay.metered.ca:80?transport=tcp",
+            username: "29123a95a7760d9589bd2fe9",
+            credential: "+s3gnlXw0IitKA5n",
+          },
+          {
+            urls: "turn:global.relay.metered.ca:443",
+            username: "29123a95a7760d9589bd2fe9",
+            credential: "+s3gnlXw0IitKA5n",
+          },
+          {
+            urls: "turns:global.relay.metered.ca:443?transport=tcp",
+            username: "29123a95a7760d9589bd2fe9",
+            credential: "+s3gnlXw0IitKA5n",
+          },
+      ],
       });
     }
   }
