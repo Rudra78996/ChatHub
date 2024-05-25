@@ -1,42 +1,15 @@
 class PeerProvider {
-  constructor() {
+   constructor() {
     if (!this.peer) {
-      this.peer = new RTCPeerConnection({
-        iceServers: [
-          {
-            urls: "stun:stun.l.google.com:19302",
-          },
-          { urls: "stun:stun1.l.google.com:19302" },
-          // {
-          //   urls: "stun:stun.stunprotocol.org",
-          // },
-          // {
-          //   urls: "turn:numb.viagenie.ca",
-          //   credential: "muazkh",
-          //   username: "webrtc@live.com",
-          // },
-          // {
-          //   urls: "turn:global.relay.metered.ca:80",
-          //   username: "29123a95a7760d9589bd2fe9",
-          //   credential: "+s3gnlXw0IitKA5n",
-          // },
-          // {
-          //   urls: "turn:global.relay.metered.ca:80?transport=tcp",
-          //   username: "29123a95a7760d9589bd2fe9",
-          //   credential: "+s3gnlXw0IitKA5n",
-          // },
-          // {
-          //   urls: "turn:global.relay.metered.ca:443",
-          //   username: "29123a95a7760d9589bd2fe9",
-          //   credential: "+s3gnlXw0IitKA5n",
-          // },
-          // {
-          //   urls: "turns:global.relay.metered.ca:443?transport=tcp",
-          //   username: "29123a95a7760d9589bd2fe9",
-          //   credential: "+s3gnlXw0IitKA5n",
-          // },
-        ],
-      });
+      fetch("https://chat-hub.metered.live/api/v1/turn/credentials?apiKey=3f9ef4bcde68fb2bb9eed042698a5b1f9f8f").then((res)=>{
+        return res.json();
+      }).then((data)=>{
+        this.peer = new RTCPeerConnection({
+          iceServers: data 
+        });
+      }).catch((err)=>{
+        console.log(err);
+      })
     }
   }
 
