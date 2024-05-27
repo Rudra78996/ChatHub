@@ -1,0 +1,8 @@
+.room-video{
+    width: 100%;
+    flex: 1; 
+    border-radius: 10px; 
+    overflow: hidden;
+    object-fit: cover; 
+    background-color: black;
+}

@@ -1,4 +1,4 @@
-body {
+.body-home {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -12,15 +12,15 @@ body {
     -moz-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     background-color: #234142;
+    height: 100vh;
   }
   #heading{
-    margin-top: 30px;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-   
+    background-color: #234142;
   }
   #heading1{
     background-color: black;
@@ -31,6 +31,7 @@ body {
     justify-content: center;
     flex-direction: row;
     border-radius: 20px;
+    margin-top: 30px;
   }
   .chat{
     background-color: black;

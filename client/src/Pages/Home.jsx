@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 function Home() {
 
   return (
-    <div>
+    <div className="body-home">
       <header>
         <div id="heading">
           <h1 id="heading1">
