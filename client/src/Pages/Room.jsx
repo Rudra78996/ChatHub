@@ -106,6 +106,8 @@ const Room = () => {
           break;
         case "disconnected":
           console.log("disconnected");
+          toast.error("disconnected");
+          videoRef2.current.srcObject = null;
           // setFoundMatch(false);
           // setRemoteStream(null);
           break;
