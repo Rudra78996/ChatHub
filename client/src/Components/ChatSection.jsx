@@ -55,7 +55,7 @@ const ChatSection = ({ matchFound }) => {
           onKeyPress={(e) => e.key === "Enter" && handleSend()}
         />
         <button
-          className="chat-section-send-button"
+          className="btn btn-primary"
           onClick={handleSend}
           disabled={!matchFound}
         >

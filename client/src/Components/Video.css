@@ -5,4 +5,5 @@
     overflow: hidden;
     object-fit: cover; 
     background-color: black;
+    border: 1px solid #2c3e50;
 }

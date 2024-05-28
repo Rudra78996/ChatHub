@@ -8,8 +8,8 @@ const VideoSection = ({remoteStream, localStream, joinCallHandler, sendStreams, 
       <Video stream={localStream} muted={true}/>
       <Video stream={remoteStream} muted={false}/>
       <div className="video-buttons">
-        <button onClick={sendStreams} disabled={!disable}>Send Stream</button>
-        <button onClick={joinCallHandler} >
+        <button className="btn btn-primary" onClick={sendStreams} disabled={!disable}>Send Stream</button>
+        <button onClick={joinCallHandler}  className="btn btn-primary">
           Join
         </button>
       </div>

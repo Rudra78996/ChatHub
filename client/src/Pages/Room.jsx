@@ -170,7 +170,7 @@ const Room = () => {
           localStream={videoRef1}
           joinCallHandler={joinCallHandler}
           sendStreams={sendStreams}
-          disable={disable}
+          disable={foundMatch}
         />
         <ChatSection matchFound={foundMatch} className="room-chat-section"/>
       </div>
