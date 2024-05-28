@@ -21,6 +21,7 @@ body {
   flex: 1;
   margin-top: 60px;
   overflow: hidden;
+  justify-content: center;
 }
 
 .room-video-section {
@@ -29,3 +30,13 @@ body {
   height: 80%;
 }
 
+@media (max-width: 600px) {
+  .room-main-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .room-chat-section {
+    display: none;
+  }
+}

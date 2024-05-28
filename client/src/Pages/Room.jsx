@@ -172,7 +172,7 @@ const Room = () => {
           sendStreams={sendStreams}
           disable={disable}
         />
-        <ChatSection matchFound={foundMatch} />
+        <ChatSection matchFound={foundMatch} className="room-chat-section"/>
       </div>
     </div>
   );
