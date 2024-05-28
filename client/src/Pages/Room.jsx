@@ -126,11 +126,11 @@ const Room = () => {
     });
   }, []);
 
-  useEffect(() => {
-    if (myStream) {
-      sendStreams();
-    }
-  }, [myStream, sendStreams]);
+  // useEffect(() => {
+  //   if (myStream) {
+  //     sendStreams();
+  //   }
+  // }, [myStream, sendStreams]);
 
   const handleNegoNeedIncoming = useCallback(
     async ({ offer }) => {
