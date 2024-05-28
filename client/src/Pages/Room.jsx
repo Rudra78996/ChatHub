@@ -11,7 +11,6 @@ const Room = () => {
   const [disable, setDisable] = useState(false);
   const { socket } = useSocket();
   const [foundMatch, setFoundMatch] = useState(false);
-  const [message, setMessage] = useState("");
   const [myStream, setMyStream] = useState();
   const [remoteStream, setRemoteStream] = useState();
 
@@ -112,6 +111,7 @@ const Room = () => {
           // setRemoteStream(null);
           break;
         case "failed":
+          toast.error("connection failed");
           console.log("The connection has failed.");
           break;
         case "closed":
@@ -126,11 +126,11 @@ const Room = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (myStream) {
-  //     sendStreams();
-  //   }
-  // }, [myStream, sendStreams]);
+  useEffect(() => {
+    if (myStream) {
+      sendStreams();
+    }
+  }, [myStream, sendStreams]);
 
   const handleNegoNeedIncoming = useCallback(
     async ({ offer }) => {
@@ -174,7 +174,7 @@ const Room = () => {
           sendStreams={sendStreams}
           disable={foundMatch}
         />
-        <ChatSection matchFound={foundMatch} className="room-chat-section"/>
+        <ChatSection matchFound={foundMatch} className="room-chat-section" />
       </div>
     </div>
   );
