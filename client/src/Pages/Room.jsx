@@ -16,6 +16,7 @@ const Room = () => {
 
   const videoRef1 = useRef(null);
   const videoRef2 = useRef(null);
+  const streamAddedRef = useRef(false);
 
   const localStreamHandler = useCallback(async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -29,12 +30,13 @@ const Room = () => {
   }, []);
 
   const sendStreams = useCallback(() => {
-    if (myStream) {
+    if (myStream && !streamAddedRef.current) {
       const tracks = myStream.getTracks();
       try {
         tracks.forEach((track) => {
           PeerService.peer.addTrack(track, myStream);
         });
+        streamAddedRef.current = true;
       } catch (e) {
         console.error("Error adding tracks to peer connection", e);
       }
