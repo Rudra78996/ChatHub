@@ -11,12 +11,11 @@ const Room = () => {
   const [disable, setDisable] = useState(false);
   const { socket } = useSocket();
   const [foundMatch, setFoundMatch] = useState(false);
-  const [myStream, setMyStream] = useState(null);
-  const [remoteStream, setRemoteStream] = useState(null);
+  const [myStream, setMyStream] = useState();
+  const [remoteStream, setRemoteStream] = useState();
 
   const videoRef1 = useRef(null);
   const videoRef2 = useRef(null);
-  const streamAddedRef = useRef(false);
 
   const localStreamHandler = useCallback(async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -30,30 +29,18 @@ const Room = () => {
   }, []);
 
   const sendStreams = useCallback(() => {
-    if (myStream && !streamAddedRef.current) {
+    if (myStream) {
       const tracks = myStream.getTracks();
       try {
         tracks.forEach((track) => {
           PeerService.peer.addTrack(track, myStream);
         });
-        streamAddedRef.current = true;
-      } catch (e) {
-        console.error("Error adding tracks to peer connection", e);
-      }
+      } catch (e) {}
     }
   }, [myStream]);
 
   useEffect(() => {
     localStreamHandler();
-  }, [localStreamHandler]);
-
-  useEffect(() => {
-    if (myStream) {
-      sendStreams();
-    }
-  }, [myStream, sendStreams]);
-
-  useEffect(() => {
     const matchFoundHandler = async (data) => {
       setDisable(true);
       setFoundMatch(true);
@@ -100,7 +87,6 @@ const Room = () => {
     const offer = await PeerService.getOffer();
     socket.emit("peer:nego:needed", { offer });
   }, [socket]);
-
   useEffect(() => {
     PeerService.peer.addEventListener("negotiationneeded", handleNegoNeeded);
     return () => {
@@ -121,6 +107,8 @@ const Room = () => {
           console.log("disconnected");
           toast.error("disconnected");
           videoRef2.current.srcObject = null;
+          // setFoundMatch(false);
+          // setRemoteStream(null);
           break;
         case "failed":
           toast.error("connection failed");
@@ -137,6 +125,12 @@ const Room = () => {
       }
     });
   }, []);
+
+  // useEffect(() => {
+  //   if (myStream) {
+  //     sendStreams();
+  //   }
+  // }, [myStream, sendStreams]);
 
   const handleNegoNeedIncoming = useCallback(
     async ({ offer }) => {
