@@ -12,50 +12,43 @@ const Room = () => {
   const { socket } = useSocket();
   const [foundMatch, setFoundMatch] = useState(false);
   const [myStream, setMyStream] = useState(null);
-  const [remoteStream, setRemoteStream] = useState();
+  const [remoteStream, setRemoteStream] = useState(null);
 
   const videoRef1 = useRef(null);
   const videoRef2 = useRef(null);
 
   const localStreamHandler = useCallback(async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      audio: true,
-      video: true,
-    });
-    setMyStream(stream);
-    if (videoRef1.current) {
-      videoRef1.current.srcObject = stream;
-    }
-  }, []);
-
-  const sendStreams = async () => {
-    const tracks = await myStream.getTracks();
     try {
-      tracks.forEach((track) => {
-        PeerService.peer.addTrack(track, myStream);
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: true,
       });
-    } catch (e) {
-      console.log("?????", e);
-    }
-  };
-
-  useEffect(() => {
-    if (myStream) {
-      console.log('myStream updated:', myStream);
-      sendStreams();
-    }
-  }, [myStream]);
-
-  useEffect(() => {
-    navigator.mediaDevices.getUserMedia({
-      audio: true,
-      video: true,
-    }).then((stream)=>{
       setMyStream(stream);
       if (videoRef1.current) {
         videoRef1.current.srcObject = stream;
       }
-    });
+    } catch (error) {
+      console.error("Error accessing media devices.", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (myStream) {
+      console.log('myStream updated:', myStream);
+      const tracks = myStream.getTracks();
+      try {
+        tracks.forEach((track) => {
+          PeerService.peer.addTrack(track, myStream);
+        });
+      } catch (e) {
+        console.log("Error adding tracks:", e);
+      }
+    }
+  }, [myStream]);
+
+  useEffect(() => {
+    localStreamHandler();
+
     const matchFoundHandler = async (data) => {
       setDisable(true);
       setFoundMatch(true);
@@ -77,10 +70,6 @@ const Room = () => {
     const answerHandler = async (ans) => {
       console.log("answer received", ans);
       await PeerService.setRemoteDescription(ans);
-      sendStreams();
-      setTimeout(() => {
-        sendStreams();
-      }, 5000);
     };
 
     const waitHandler = () => {
@@ -104,20 +93,18 @@ const Room = () => {
       socket.off("peer:nego:needed", handleNegoNeedIncoming);
       socket.off("peer:nego:final", handleNegoNeedFinal);
     };
-  }, [socket]);
+  }, [socket, localStreamHandler]);
 
   const handleNegoNeeded = useCallback(async () => {
     const offer = await PeerService.getOffer();
     console.log("nego offer generated", offer);
     socket.emit("peer:nego:needed", { offer });
   }, [socket]);
+
   useEffect(() => {
     PeerService.peer.addEventListener("negotiationneeded", handleNegoNeeded);
     return () => {
-      PeerService.peer.removeEventListener(
-        "negotiationneeded",
-        handleNegoNeeded
-      );
+      PeerService.peer.removeEventListener("negotiationneeded", handleNegoNeeded);
     };
   }, [handleNegoNeeded]);
 
@@ -131,8 +118,6 @@ const Room = () => {
           console.log("disconnected");
           toast.error("disconnected");
           videoRef2.current.srcObject = null;
-          // setFoundMatch(false);
-          // setRemoteStream(null);
           break;
         case "failed":
           toast.error("connection failed");
@@ -142,29 +127,18 @@ const Room = () => {
           console.log("The connection has been closed.");
           break;
         default:
-          console.log(
-            `Connection state changed to: ${PeerService.peer.connectionState}`
-          );
+          console.log(`Connection state changed to: ${PeerService.peer.connectionState}`);
           break;
       }
     });
   }, []);
 
-  // useEffect(() => {
-  //   if (myStream) {
-  //     sendStreams();
-  //   }
-  // }, [myStream, sendStreams]);
-
-  const handleNegoNeedIncoming = useCallback(
-    async ({ offer }) => {
-      console.log("nego offer received", offer);
-      const ans = await PeerService.getAnswer(offer);
-      console.log("nego answer generated", ans);
-      socket.emit("peer:nego:done", { ans });
-    },
-    [socket]
-  );
+  const handleNegoNeedIncoming = useCallback(async ({ offer }) => {
+    console.log("nego offer received", offer);
+    const ans = await PeerService.getAnswer(offer);
+    console.log("nego answer generated", ans);
+    socket.emit("peer:nego:done", { ans });
+  }, [socket]);
 
   const handleNegoNeedFinal = useCallback(async ({ ans }) => {
     console.log("nego answer received", ans);
@@ -178,7 +152,9 @@ const Room = () => {
         const remoteStream = ev.streams[0];
         console.log("GOT TRACKS!!");
         setRemoteStream(remoteStream);
-        videoRef2.current.srcObject = remoteStream;
+        if (videoRef2.current) {
+          videoRef2.current.srcObject = remoteStream;
+        }
       });
     }
   }, []);
@@ -198,7 +174,6 @@ const Room = () => {
           remoteStream={videoRef2}
           localStream={videoRef1}
           joinCallHandler={joinCallHandler}
-          sendStreams={sendStreams}
           disable={foundMatch}
         />
         <ChatSection matchFound={foundMatch} />
