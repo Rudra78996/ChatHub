@@ -28,8 +28,8 @@ const Room = () => {
     }
   }, []);
 
-  const sendStreams = () => {
-    const tracks = myStream.getTracks();
+  const sendStreams = async () => {
+    const tracks = await myStream.getTracks();
     try {
       tracks.forEach((track) => {
         PeerService.peer.addTrack(track, myStream);
