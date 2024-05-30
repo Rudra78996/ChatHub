@@ -11,7 +11,7 @@ const Room = () => {
   const [disable, setDisable] = useState(false);
   const { socket } = useSocket();
   const [foundMatch, setFoundMatch] = useState(false);
-  const [myStream, setMyStream] = useState();
+  const [myStream, setMyStream] = useState(null);
   const [remoteStream, setRemoteStream] = useState();
 
   const videoRef1 = useRef(null);
@@ -28,36 +28,59 @@ const Room = () => {
     }
   }, []);
 
-  const sendStreams = useCallback(() => {
+  const sendStreams = () => {
+    const tracks = myStream.getTracks();
+    try {
+      tracks.forEach((track) => {
+        PeerService.peer.addTrack(track, myStream);
+      });
+    } catch (e) {
+      console.log("?????", e);
+    }
+  };
+
+  useEffect(() => {
     if (myStream) {
-      const tracks = myStream.getTracks();
-      try {
-        tracks.forEach((track) => {
-          PeerService.peer.addTrack(track, myStream);
-        });
-      } catch (e) {}
+      console.log('myStream updated:', myStream);
+      sendStreams();
     }
   }, [myStream]);
 
   useEffect(() => {
-    localStreamHandler();
+    navigator.mediaDevices.getUserMedia({
+      audio: true,
+      video: true,
+    }).then((stream)=>{
+      setMyStream(stream);
+      if (videoRef1.current) {
+        videoRef1.current.srcObject = stream;
+      }
+    });
     const matchFoundHandler = async (data) => {
       setDisable(true);
       setFoundMatch(true);
       toast.success("User Connected");
       if (data.createReq) {
         const offer = await PeerService.getOffer();
+        console.log("offer generated", offer);
         socket.emit("offer", { offer });
       }
     };
 
     const offerHandler = async (offer) => {
+      console.log("offer received", offer);
       const ans = await PeerService.getAnswer(offer);
+      console.log("answer generated", ans);
       socket.emit("answer", ans);
     };
 
     const answerHandler = async (ans) => {
+      console.log("answer received", ans);
       await PeerService.setRemoteDescription(ans);
+      sendStreams();
+      setTimeout(() => {
+        sendStreams();
+      }, 5000);
     };
 
     const waitHandler = () => {
@@ -85,6 +108,7 @@ const Room = () => {
 
   const handleNegoNeeded = useCallback(async () => {
     const offer = await PeerService.getOffer();
+    console.log("nego offer generated", offer);
     socket.emit("peer:nego:needed", { offer });
   }, [socket]);
   useEffect(() => {
@@ -134,13 +158,16 @@ const Room = () => {
 
   const handleNegoNeedIncoming = useCallback(
     async ({ offer }) => {
+      console.log("nego offer received", offer);
       const ans = await PeerService.getAnswer(offer);
+      console.log("nego answer generated", ans);
       socket.emit("peer:nego:done", { ans });
     },
     [socket]
   );
 
   const handleNegoNeedFinal = useCallback(async ({ ans }) => {
+    console.log("nego answer received", ans);
     await PeerService.setRemoteDescription(ans);
   }, []);
 
@@ -174,7 +201,7 @@ const Room = () => {
           sendStreams={sendStreams}
           disable={foundMatch}
         />
-        <ChatSection matchFound={foundMatch} className="room-chat-section" />
+        <ChatSection matchFound={foundMatch} />
       </div>
     </div>
   );

@@ -30,13 +30,15 @@ body {
   height: 80%;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 885px) {
   .room-main-content {
     flex-direction: column;
     align-items: center;
   }
 
-  .room-chat-section {
+  .chat-section {
     display: none;
+    background-color: red;
+    visibility: hidden
   }
 }
