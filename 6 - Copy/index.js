@@ -7,20 +7,16 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-// Create empty arrays to store user IDs
 const users = [];
 
 io.on('connection', (socket) => {
-    const userId = socket.id; // Unique ID assigned by Socket.IO
+    const userId = socket.id; 
     console.log(`User connected: ${userId}`);
     
-    // Emit the unique ID back to the connected client
     socket.emit('userConnected', userId);
 
-    // Add user ID to the users array
     users.push(userId);
 
-    // Emit the list of users to all connected clients
     io.emit('userList', users);
 
     socket.on('Usermessage', (message) => {
@@ -30,12 +26,10 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         console.log(`User disconnected: ${userId}`);
-        // Remove the disconnected user from the users array
         const index = users.indexOf(userId);
         if (index !== -1) {
             users.splice(index, 1);
         }
-        // Emit the updated list of users to all connected clients
         io.emit('userList', users);
     });
 });
