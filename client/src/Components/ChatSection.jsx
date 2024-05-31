@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./ChatSection.css";
 import { useSocket } from "../helper/socket";
 import ChatBubble from "./ChatBubble";
+import EmojiPicker from "emoji-picker-react";
 
 const ChatSection = ({ matchFound }) => {
+  const [showPicker, setShowPicker] = useState(false);
   const { socket } = useSocket();
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -38,6 +40,12 @@ const ChatSection = ({ matchFound }) => {
     };
   }, [socket]);
 
+  const onEmojiClick = (emojiObject) => {
+    setMessage((val) => {
+      return val + emojiObject.emoji;
+    });
+  };
+
   return (
     <div className="chat-section">
       <div className="chat-section-messages">
@@ -46,6 +54,22 @@ const ChatSection = ({ matchFound }) => {
         ))}
       </div>
       <div className="chat-section-input-container">
+        <i
+          className="fa-regular fa-face-smile"
+          style={{
+            fontSize:"26px",
+            color:"grey",
+            borderRadius:"50%",
+            margin:"10px",
+            cursor:"pointer"
+          }}
+          onClick={() => setShowPicker((val) => !val)}
+        ></i>
+        {showPicker && (
+          <div className="emoji-picker-container">
+            <EmojiPicker onEmojiClick={onEmojiClick} />
+          </div>
+        )}
         <input
           type="text"
           className="chat-section-chat-input"

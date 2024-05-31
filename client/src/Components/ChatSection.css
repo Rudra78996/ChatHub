@@ -23,6 +23,7 @@
 .chat-section-input-container {
   display: flex;
   align-items: center;
+  position: relative; 
 }
 
 .chat-section-chat-input {
@@ -31,4 +32,11 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-right: 10px;
+}
+
+.emoji-picker-container {
+  position: absolute; 
+  bottom: 67px;
+  z-index: 1000;
+  left: 1%;
 }
