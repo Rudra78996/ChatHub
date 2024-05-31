@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>This is a chat app</title>
+    <style>
+        body{
+            margin: 0px;
+        }
+        /* .logo{
+            max-width: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgb(0, 0, 0);
+            background-color:#BBE0D9;
+            
+            overflow: auto;
+        } */
+        #box{
+            
+            display: flex;
+            max-height: 900px;
+            min-height: 500px;
+            max-width: 2000px;
+            background-color: #000000;
+            justify-content: space-around;
+            align-items: center;
+            flex-direction: row;
+        }
+        #firstbox{
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            flex-direction: column;
+            align-items:center;
+            justify-content: center;
+        }
+        #rec {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #E7F5EB;
+            color: rgb(0, 0, 0);
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            max-width: 600px;
+            height: 400px;
+
+            padding: 20px; /* Add some padding for spacing */
+            /* border: 2px solid #ccc; Add a border for clarity */
+            border-radius: 10px; /* Rounded corners for a nicer look */
+            box-shadow: 10 10 10px rgba(108, 106, 106, 0.1); /* Add a subtle shadow for depth */
+            /* overflow-x: none; Hide horizontal scrollbar */
+            overflow: auto; /* Add vertical scrollbar if content exceeds height */
+            margin-bottom: 30px;
+            margin-left: 30px;
+            /* box-shadow: 10px   10px rgb(255, 255, 255); */
+        }
+        input{
+            margin-top: 30px;
+            max-width: 400px;
+            min-width: 250px;
+            height: 30px;
+            background-color: #E7F5EB;
+        }
+        #Send{
+            width: 70px;
+            margin-top: 10px;
+            height: 30px;
+            color: white;
+            background-color: #08AEE5;
+        }
+        #heading{
+            
+            /* height: 80px; */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            background-color: #234142;
+            /* border-radius: 30px; */
+        }
+        #heading1{
+            background-color: black;
+            width: 180px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+        .chat{
+            background-color: black;
+            color: white;
+        }
+        .hub{
+            background-color: #FF9A00;
+            color: black;}
+        h3{
+            color:grey
+        }
+        #userList{
+            padding-left: 20px;
+            align-self: flex-start;
+            margin-bottom: 30px;
+            max-width: 250px;
+            /* min-width: 250px; */
+            border-radius: 30px;
+            height: 200px;
+            overflow: auto;
+            overflow-x: hidden;
+            border: 2px solid black;
+            background-color:#E7F5EB;
+            /* background-color: #234142; */
+            color: rgb(0, 0, 0);
+        }
+        p{
+            width: 400px;
+            /* margin: 0px; */
+            /* background-color: #08AEE5; */
+            /* color: white; */
+        }
+        #mm{
+            width: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #Send1{
+            background-color: #08AEE5;
+            margin-top: 20px;
+            height: 30px;
+            background-color: #234142;
+            color: white;
+            border-radius: 20px;
+            border: none;
+        }
+        @media (max-width: 700px) and   (min-width: 505px){
+            #box{
+            display: flex;
+            /* max-height: 900px; */
+            min-height: 500px;
+            max-width: 800px;
+            background-color: #000000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column-reverse;
+        }
+        #rec {
+            margin-top: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #E7F5EB;
+            color: rgb(0, 0, 0);
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            max-width: 400px;
+            max-height: 300px;
+
+            padding: 20px;
+            margin-right: 20px;
+            border-radius: 10px;
+            box-shadow: 10 10 10px rgba(108, 106, 106, 0.1); 
+            overflow: none;
+            margin-bottom: 10px;
+            
+            }
+            #userList{
+                display: none;
+            }
+        }
+        @media (max-width: 505px )and (min-width:300px){
+            body{
+                max-height: 800px;
+            }
+            #box{
+                display: flex;
+                /* max-height: 900px; */
+                min-height: 500px;
+                max-width: 800px;
+                background-color: #000000;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column-reverse;
+            }
+            #rec {
+                margin-top: 30px;
+                display: flex;
+                flex-wrap: wrap;
+                background-color: #E7F5EB;
+                color: rgb(0, 0, 0);
+                align-items: center;
+                justify-content: center;
+                flex-direction: row;
+                max-width: 250px;
+                max-height: 300px;
+
+                padding: 20px;
+                margin-right: 20px;
+                border-radius: 10px;
+                box-shadow: 10 10 10px rgba(108, 106, 106, 0.1); 
+                overflow: none;
+                margin-bottom: 10px;
+            
+            }
+            #userList{
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="heading">
+        <h1 id="heading1">
+          <div class="chat">Chat</div>
+          <div class="hub">Hub</div>
+        </h1>
+    </div>
+    
+    <div id="box">
+        <div id="firstbox">
+            <div id="userList"></div>
+            <input placeholder="Enter Your text (Max len 100..)" type="text" id="msginp" maxlength="100">
+            <button id="Send">Send</button>
+            <button id="Send1">Send Private message to online users</button>
+        </div>
+        <div id="rec">
+            <h3 id="mm">Message will be displayed here!!!!!</h3>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        let userId;
+        const inputField = document.getElementById('msginp');
+
+        inputField.addEventListener('input', function() {
+            const maxLength = parseInt(inputField.getAttribute('maxlength'));
+            const currentLength = inputField.value.length;
+            const remaining = maxLength - currentLength;
+
+            if (remaining < 0) {
+                inputField.value = inputField.value.slice(0, maxLength);
+            }
+        });
+
+        // Receive and store the user's unique ID
+        socket.on('userConnected', (id) => {
+            userId = id;
+            console.log(`Connected with ID: ${userId}`);
+        });
+
+        // Update the user list when received from the server
+        socket.on('userList', (users) => {
+            const userListElement = document.getElementById('userList');
+            userListElement.innerHTML = "<h3>Users Online:</h3>" + users.map(user => `<p>${user}</p>`).join('');
+        });
+
+        const send = document.querySelector("#Send");
+        const msg = document.querySelector('#msginp');
+
+        send.addEventListener('click', (e) => {
+            const message = msg.value;
+            console.log(`Sending message: ${message}`);
+            socket.emit('Usermessage', message); // Send message to server
+            msg.value = ""; // Clear the input field after sending
+        });
+
+        const recived = document.querySelector("#rec");
+
+        socket.on('message', (data) => {
+            const p = document.createElement('p');
+            p.innerText = `User ${data.userId}: ${data.message}`;
+            recived.appendChild(p);
+        });
+    </script>
+</body>
+</html>
