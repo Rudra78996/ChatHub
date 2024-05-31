@@ -253,13 +253,11 @@
             }
         });
 
-        // Receive and store the user's unique ID
         socket.on('userConnected', (id) => {
             userId = id;
             console.log(`Connected with ID: ${userId}`);
         });
 
-        // Update the user list when received from the server
         socket.on('userList', (users) => {
             const userListElement = document.getElementById('userList');
             userListElement.innerHTML = "<h3>Users Online:</h3>" + users.map(user => `<p>${user}</p>`).join('');
