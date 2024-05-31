@@ -182,6 +182,11 @@ const Room = () => {
     setDisable(true);
   };
 
+  const endCallHandler = ()=>{
+    location.reload();
+    PeerService.peer.close();
+  }
+
   return (
     <div className="room">
       <Toaster position="room-top-center" reverseOrder={false} />
@@ -192,6 +197,7 @@ const Room = () => {
           localStream={videoRef1}
           joinCallHandler={joinCallHandler}
           disable={foundMatch}
+          endCallHandler={endCallHandler}
         />
         <ChatSection matchFound={foundMatch} />
       </div>
