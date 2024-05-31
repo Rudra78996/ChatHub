@@ -78,6 +78,22 @@ const Room = () => {
       }, 1000);
     };
 
+    socket.on("ice-candidate", async (candidate) => {
+      try {
+        await PeerService.peer.addIceCandidate(candidate);
+        console.log("done");
+      } catch (e) {
+        console.error('Error adding received ice candidate', e);
+      }
+    });
+
+    PeerService.peer.addEventListener('icecandidate', (event) => {
+      console.log("ice")
+      if (event.candidate) {
+        socket.emit('ice-candidate', event.candidate);
+      }
+    });
+
     socket.on("match-found", matchFoundHandler);
     socket.on("wait", waitHandler);
     socket.on("offer", offerHandler);
@@ -92,6 +108,7 @@ const Room = () => {
       socket.off("answer", answerHandler);
       socket.off("peer:nego:needed", handleNegoNeedIncoming);
       socket.off("peer:nego:final", handleNegoNeedFinal);
+      socket.off("icecandidate");
     };
   }, [socket, localStreamHandler]);
 
