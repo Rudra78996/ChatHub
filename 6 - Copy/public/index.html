@@ -51,11 +51,10 @@
             max-width: 600px;
             height: 400px;
 
-            padding: 20px; /* Add some padding for spacing */
-            /* border: 2px solid #ccc; Add a border for clarity */
-            border-radius: 10px; /* Rounded corners for a nicer look */
-            box-shadow: 10 10 10px rgba(108, 106, 106, 0.1); /* Add a subtle shadow for depth */
-            /* overflow-x: none; Hide horizontal scrollbar */
+            padding: 20px;
+            border-radius: 10px; 
+            box-shadow: 10 10 10px rgba(108, 106, 106, 0.1); 
+           
             overflow: auto; /* Add vertical scrollbar if content exceeds height */
             margin-bottom: 30px;
             margin-left: 30px;
@@ -254,13 +253,11 @@
             }
         });
 
-        // Receive and store the user's unique ID
         socket.on('userConnected', (id) => {
             userId = id;
             console.log(`Connected with ID: ${userId}`);
         });
 
-        // Update the user list when received from the server
         socket.on('userList', (users) => {
             const userListElement = document.getElementById('userList');
             userListElement.innerHTML = "<h3>Users Online:</h3>" + users.map(user => `<p>${user}</p>`).join('');
