@@ -7,7 +7,7 @@ import { Routes, Route } from "react-router-dom";
 const App = () => {
   return (
     <SocketProvider>
-      <Routes>
+      <Routes basename = "/">
         <Route path="/" element={<Home />} />
         <Route path="/room" element={<Room />} />
       </Routes>

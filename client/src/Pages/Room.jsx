@@ -135,6 +135,8 @@ const Room = () => {
           console.log("disconnected");
           toast.error("disconnected");
           videoRef2.current.srcObject = null;
+          location.reload();
+          PeerService.peer.close();
           break;
         case "failed":
           toast.error("connection failed");
