@@ -4,7 +4,7 @@ import "./NavBarRoom.css";
 const NavBar = ({ exitHandler }) => {
   return (
     <div className="room-navbar">
-      <img src="./Images/logo.png" height={200} className="room-logo" />
+      <div className="room-logo">ChatHub</div>
       <button className="btn btn-danger room-leave-btn" onClick={exitHandler}>
         <i className="fa-solid fa-arrow-right-from-bracket"></i>
       </button>

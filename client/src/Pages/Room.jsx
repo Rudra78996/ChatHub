@@ -218,6 +218,7 @@ const Room = () => {
       }
     }
     PeerService.peer.close();
+    toast.update(loaderId, { render: "Error", type: "error", isLoading: false, autoClose: 2000,hideProgressBar:true} );
     navigate("/");
   };
 
