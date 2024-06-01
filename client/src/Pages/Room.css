@@ -39,6 +39,11 @@ body {
   .chat-section {
     display: none;
     background-color: red;
-    visibility: hidden
+    visibility: hidden;
   }
+}
+.toast-message {
+  width: 10rem;
+  margin: auto;
+  margin-top: 2%;
 }

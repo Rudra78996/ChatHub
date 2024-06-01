@@ -5,10 +5,12 @@ import "./Room.css";
 import ChatSection from "../Components/ChatSection";
 import NavBar from "../Components/NavBarRoom";
 import VideoSection from "../Components/VideoSection";
-import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import {  toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";   
 
 const Room = () => {
+  const [loaderId, setLoaderId] = useState(null);
   const [disable, setDisable] = useState(false);
   const { socket } = useSocket();
   const [foundMatch, setFoundMatch] = useState(false);
@@ -50,9 +52,7 @@ const Room = () => {
     localStreamHandler();
 
     const matchFoundHandler = async (data) => {
-      setDisable(true);
       setFoundMatch(true);
-      toast.success("User Connected");
       if (data.createReq) {
         const offer = await PeerService.getOffer();
         socket.emit("offer", { offer });
@@ -128,17 +128,36 @@ const Room = () => {
           // console.log("The connection has become successfully established.");
           break;
         case "disconnected":
-          toast.error("disconnected");
-          videoRef2.current.srcObject = null;
-          location.reload();
-          PeerService.peer.close();
+          toast.error("disconnected", {
+            position: "top-center",
+          });
+          setTimeout(()=>{
+            videoRef2.current.srcObject = null;
+            location.reload();
+            PeerService.peer.close();
+          },500)
           break;
         case "failed":
-          toast.error("connection failed");
+          toast.error("connection failed", {
+            position: "top-center",
+          });
+          setTimeout(()=>{
+            videoRef2.current.srcObject = null;
+            location.reload();
+            PeerService.peer.close();
+          },500)
           // console.log("The connection has failed.");
           break;
         case "closed":
           // console.log("The connection has been closed.");
+          toast.error("connection close", {
+            position: "top-center",
+          });
+          setTimeout(()=>{
+            videoRef2.current.srcObject = null;
+            location.reload();
+            PeerService.peer.close();
+          },500)
           break;
         default:
           // console.log(
@@ -174,6 +193,11 @@ const Room = () => {
   }, []);
 
   const joinCallHandler = () => {
+    const id = toast.loading("Finding Match", {
+      position: "top-center",
+      className: "toast-message",
+    });
+    setLoaderId(id);
     socket.emit("join-room");
     socket.emit("find-match");
     setDisable(true);
@@ -197,9 +221,16 @@ const Room = () => {
     navigate("/");
   };
 
+  useEffect(()=>{
+    if(foundMatch){
+      if(loaderId){
+        toast.update(loaderId, { render: "Match found", type: "success", isLoading: false, autoClose: 3000,hideProgressBar:true});
+      }
+    }
+  }, [foundMatch])
+
   return (
     <div className="room">
-      <Toaster position="room-top-center" reverseOrder={false}  />
       <NavBar exitHandler={exitHandler} />
       <div className="room-main-content">
         <VideoSection
@@ -208,6 +239,7 @@ const Room = () => {
           joinCallHandler={joinCallHandler}
           disable={foundMatch}
           endCallHandler={endCallHandler}
+          joinDisable={disable}
         />
         <ChatSection matchFound={foundMatch} />
       </div>
