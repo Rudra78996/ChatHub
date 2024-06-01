@@ -42,8 +42,12 @@ body {
     visibility: hidden;
   }
 }
-.toast-message {
+/* .toast-message {
   width: 10rem;
   margin: auto;
   margin-top: 2%;
+} */
+.Toastify__toast-container {
+  width: auto !important;
+  max-width: 300px;       
 }
