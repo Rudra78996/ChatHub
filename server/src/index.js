@@ -83,12 +83,6 @@ io.on("connection", (socket) => {
     const otherSocketId = pairMap.get(socket.id);
     io.to(otherSocketId).emit("peer:nego:final", { ans });
   });
-
-//   socket.on("stream", () => {
-//     const otherSocketId = pairMap.get(socket.id);
-//     io.to(socket.id).emit("stream");
-//     io.to(otherSocketId).emit("stream");
-//   });
   socket.on('ice-candidate', (candidate) => {
     const otherSocketId = pairMap.get(socket.id);
     io.to(otherSocketId).emit('ice-candidate', candidate);
