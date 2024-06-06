@@ -9,10 +9,7 @@ const cors = require("cors");
 
 const MessageSchema = require("../Models/message");
 
-app.use(cors({
-  origin: "http://localhost:5173",
-  methods: ["GET", "POST"]
-}));
+app.use(cors());
 
 main()
   .then(() => {
@@ -24,9 +21,9 @@ async function main() {
   await mongoose.connect(process.env.URL);
 }
 
-const insertData = async (name, message) => {
+const insertData = async (name, message, avatar) => {
   try {
-    const newMessage = new MessageSchema({ name: name, message: message });
+    const newMessage = new MessageSchema({ name: name, message: message, avatar: avatar });
     await newMessage.save();
     console.log("New message saved:", newMessage);
   } catch (e) {
@@ -51,7 +48,7 @@ const port = process.env.PORT || 5000;
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
@@ -63,7 +60,7 @@ io.on("connection", (socket) => {
   socket.join("group-chat");
 
   socket.on("join-room", (name) => {
-    const avatar = `https://avatars.dicebear.com/api/bottts/${name}.svg`;
+    const avatar = `https://ui-avatars.com/api/?name=${name}&background=random&color=fff`;
     onlineUsers.push({ name, id: socket.id, avatar });
     io.to("group-chat").emit("update-user-list", onlineUsers);
     console.log("Online users:", onlineUsers);
@@ -72,16 +69,22 @@ io.on("connection", (socket) => {
   socket.on("message", (msg) => {
     const user = onlineUsers.find((el) => el.id === socket.id);
     if (user) {
-      insertData(user.name, msg);
-      io.to("group-chat").emit("message", { msg, user: user.name });
+      insertData(user.name, msg, user.avatar);
+      io.to("group-chat").emit("message", {
+        msg,
+        user: user.name,
+        avatar: user.avatar,
+      });
     }
   });
 
   socket.on("disconnect", () => {
     onlineUsers = onlineUsers.filter((el) => el.id !== socket.id);
-    io.to("group-chat").emit("update-user-list", onlineUsers.map(user => user.name));
+    io.to("group-chat").emit("update-user-list", onlineUsers);
     console.log("User disconnected. Online users:", onlineUsers);
   });
 });
 
-server.listen(port, () => console.log(`Server started at http://localhost:${port}/`));
+server.listen(port, () =>
+  console.log(`Server started at http://localhost:${port}/`)
+);

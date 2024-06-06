@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 //https://groupchat-backend-upox.onrender.com
-const socket = io("http://localhost:5000");
+const socket = io("https://groupchat-backend-upox.onrender.com");
 
 const GroupChat = () => {
   const [promptOpen, setPromptOpen] = useState(true);
@@ -53,7 +53,7 @@ const GroupChat = () => {
         className: "toast-message",
       });
       socket.emit("join-room", nameOfUser);
-      const response = await axios.get("http://localhost:5000/messages");
+      const response = await axios.get("https://groupchat-backend-upox.onrender.com/messages");
       response.data.forEach((element) => {
         setMessages((prevMessages) => [
           ...prevMessages,
