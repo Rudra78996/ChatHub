@@ -21,14 +21,14 @@ const GroupChat = () => {
 
   useEffect(() => {
     socket.on("message", (data) => {
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            {
-              message:data.msg,
-              avatar: data.avatar,
-              name: data.user,
-            },
-          ]);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          message: data.msg,
+          avatar: data.avatar,
+          name: data.user,
+        },
+      ]);
     });
 
     socket.on("update-user-list", (users) => {
@@ -53,7 +53,9 @@ const GroupChat = () => {
         className: "toast-message",
       });
       socket.emit("join-room", nameOfUser);
-      const response = await axios.get("https://groupchat-backend-upox.onrender.com/messages");
+      const response = await axios.get(
+        "https://groupchat-backend-upox.onrender.com/messages"
+      );
       response.data.forEach((element) => {
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -103,7 +105,7 @@ const GroupChat = () => {
 
       <div className="group-chat-main-content">
         <div className="group-chat-online-users">
-          <h3>Online Users</h3>
+          <div className="online-users-tittle">Online Users</div>
           <hr />
           <ul>
             {onlineUsers.map((user, index) => (
@@ -116,13 +118,12 @@ const GroupChat = () => {
         </div>
         <div className="group-chat-chat-section">
           <div className="group-chat-messages">
+            <div className="group-chat-title">Group Chat</div>{" "}
+            {/* New heading */}
             {messages.map((el, index) => (
               <span key={index}>
-                <img src={el.avatar} alt="avatar" className="chat-avatar"/>
-                <ChatBubble
-                  sender={false}
-                  message={el.message}
-                />
+                <img src={el.avatar} alt="avatar" className="chat-avatar" />
+                <ChatBubble sender={false} message={el.message} />
               </span>
             ))}
             <div ref={messagesEndRef} />
