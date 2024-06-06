@@ -1,0 +1,83 @@
+.randomChat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: black;
+  color: white;
+}
+
+.randomChat-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #121212;
+  color: white;
+  padding: 1rem;
+}
+
+.randomChat-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.randomChat-chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: #2c2c2c;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  margin-bottom: 5px;
+}
+
+.randomChat-messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #202020;
+  border-radius: 5px;
+  min-height: 200px;
+}
+
+.randomChat-input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 0.5rem;
+}
+
+.randomChat-input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 2px;
+}
+
+.randomChat-chat-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.emoji-picker-container {
+  position: absolute;
+  bottom: 67px;
+  z-index: 1000;
+  left: 1%;
+}
+
+.randomChat-button {
+  display: flex;
+}
+
+.randomChat-button button {
+  margin: 0px 8px;
+  width: 89px;
+}

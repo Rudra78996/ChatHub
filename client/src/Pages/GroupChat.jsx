@@ -17,7 +17,6 @@ const GroupChat = () => {
   const [message, setMessage] = useState("");
   const [onlineUsers, setOnlineUsers] = useState([]);
   const navigate = useNavigate();
-  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     socket.on("message", (data) => {
@@ -40,10 +39,6 @@ const GroupChat = () => {
       socket.off("message");
     };
   }, []);
-
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
 
   const handlePromptSubmit = async (nameOfUser) => {
     try {
@@ -118,15 +113,13 @@ const GroupChat = () => {
         </div>
         <div className="group-chat-chat-section">
           <div className="group-chat-messages">
-            <div className="group-chat-title">Group Chat</div>{" "}
-            {/* New heading */}
+            <div className="group-chat-title">Group Chat</div>
             {messages.map((el, index) => (
               <span key={index}>
                 <img src={el.avatar} alt="avatar" className="chat-avatar" />
                 <ChatBubble sender={false} message={el.message} />
               </span>
             ))}
-            <div ref={messagesEndRef} />
           </div>
           <div className="group-chat-message-input">
             <input
