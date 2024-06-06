@@ -1,28 +1,155 @@
-.body-home {
+body {
     margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    background: url("https://wallpapers.com/images/hd/emoticons-and-symbols-whatsapp-chat-81z2ulpylfyqalb3.jpg");
+    text-align: center;
+}
+
+.container {
+    /* background-color: #00; */
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+main{
+    background-color:rgba(0,0,0,0.5);
+    color: #ffffff;
+    padding: 10px;
+    border:1px solid #ffffff;
+    border-radius: 40px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin-right: 10px;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+main {
+    margin-top: 50px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.start-chat {
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
     font-size: 18px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #1b1e1e;
-    height: 100%;
-    min-width: 320px;
-    -ms-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    background-color: #234142;
-    height: 100vh;
-  }
-  #heading{
+    cursor: pointer;
+}
+
+.chat-options {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-button {
+    padding: 5px 20px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.chat-button.text {
+    background-color: #00f;
+}
+
+.chat-button.video {
+    background-color: #0f0;
+}
+
+.uncensored {
+    display: inline-block;
+    margin: 20px 0;
+    background-color: #f0f;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.age-restriction,
+.online-count,
+.guidelines {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.guidelines {
+    color: #00f;
+    text-decoration: none;
+}
+
+body::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: none;
+    animation: wave 10s linear infinite;
+}
+
+@keyframes wave {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-1000px);
+    }
+}
+#heading{
+    margin-top: 30px;
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
-    background-color: #234142;
+    border: 5px solid rgb(0, 0, 0);
+   border-radius: 30px;
   }
-  #heading1{
+#heading1{
     background-color: black;
     width: 180px;
     height: 60px;
@@ -31,160 +158,12 @@
     justify-content: center;
     flex-direction: row;
     border-radius: 20px;
-    margin-top: 30px;
   }
   .chat{
     background-color: black;
-    color: white;
+    color: rgb(255, 255, 255);
   }
   .hub{
     background-color: #FF9A00;
     color: black;
   }
-  .container{
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* justify-content: center; */
-    justify-content:space-between;
-    flex-wrap: nowrap;
-    /* background-color: aliceblue; */
-    background:url("https://th.bing.com/th/id/OIP.FfNbPHXiTsfRwr_GZyPKEAHaHa?rs=1&pid=ImgDetMain") no-repeat center/cover;
-    max-width: 500px;
-    height: 500px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    padding-top: 20px;
-    border-radius: 30px; 
-    /* background-repeat: no-repeat;  */
-    animation-name: rishi1;
-    animation-duration: 2s;
-    animation-iteration-count: 1;  
-    animation-fill-mode: alternate;
-    animation-delay: 1s;
-  }
-  @keyframes rishi1 {
-    from{
-        /* width: 0px; */
-        height: 0px;
-
-    }
-    to{
-        /* max-width:500px; */
-        max-height: 500px;
-    }
-}
-  @keyframes rishi2{
-    0%{
-      padding: 0px;
-    }
-    50%{
-      padding: 0px;
-      background-color: #198754;
-      color: white;
-    }
-    100%{
-      padding: 0px;
-      color: #198754;
-      border: 2px solid #198754;
-      background-color: white;
-    }
-  }
-.gif{
-  max-width: 500px;
-  height: 450px;
-  position:absolute;
-  opacity: 0.1;
-  z-index: -1;
-  border-radius: 30px;
-    /* margin-top: 20px; */
-}
-.vcbtn{
-  border: 2px solid #198754;
-  background-color: white;
-  animation-name: rishi2;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  animation-delay: 1s;
-  animation-fill-mode: alternate;
-  padding: 4px;
-  color: #198754;
-}
-.entervc :hover{
-  background-color: #198754;
-  color: white;
-  animation: none;
-  /* border: 2px solid #198754; */
-}
-.entervc{
-  margin-bottom: 60px;
-}
-.para1 {
-  color:rgb(255, 255, 255);
-  animation-name: rishi3;
-  animation-duration: 10s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards; 
-  align-items: center;
-  animation-delay: 1s;
-  visibility: hidden;
-  overflow: hidden; 
-  white-space: nowrap;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-weight: 2000;
-}
-
-.para2 {
-  color: rgb(255, 255, 255);
-  animation-name: rishi3;
-  animation-duration: 10s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards; 
-  align-items: center;
-  animation-delay: 1s;
-  visibility: hidden; 
-  overflow: hidden; 
-  white-space: nowrap;
-  font-family: cursive;
-  font-weight: 2000;
-}
-.transition{
-  align-items: center;
-  /* display: flex; */
-  justify-content: center;
-  background-color: rgba(0, 0, 0,0.5);
-  opacity: 0.5;
-  /* z-index: -1; */
-  animation-name: rishi3;
-  animation-duration: 10s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards; 
-  align-items: center;
-  animation-delay: 1s;
-  visibility: hidden;
-  /* overflow: hidden;  */
-  /* white-space: nowrap; */
-  border-radius:10px ;
-  /* max-width: 500px; */
-}
-
-@keyframes rishi3 {
-  0% {
-    width: 0;
-    visibility: visible; 
-    opacity: 0; /* Start invisible */
-    transform: scaleX(0); 
-  }
-  50% {
-    max-width: 500px;
-    opacity: 1;
-    transform: scaleX(1); 
-  }
-  100% {
-    opacity: 0; /* Fade out */
-  }
-}
-
-
-  
