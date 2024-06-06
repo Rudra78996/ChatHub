@@ -116,7 +116,13 @@ const RandomChat = () => {
   return (
     <div className="randomChat-container">
       <nav className="randomChat-navbar">
-        <div className="randomChat-logo">ChatHub</div>
+        <div className="randomChat-logo"><div id="heading">
+                    <h1 id="heading1">
+                        <div className="chat">Chat</div>
+                        <div className="hub">Hub</div>
+                    </h1>
+                    
+                </div></div>
         <div className="randomChat-button">
           {foundMatch ? (
             <button className="btn btn-danger" onClick={endCallHandler}>
