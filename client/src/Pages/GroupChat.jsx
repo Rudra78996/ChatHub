@@ -5,8 +5,11 @@ import "./GroupChat.css";
 import PromptDialog from "../Components/PromptDialog";
 import { useNavigate } from "react-router-dom";
 import ChatBubble from "../Components/ChatBubble";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const socket = io("https://groupchat-backend-upox.onrender.com");
+//https://groupchat-backend-upox.onrender.com
+const socket = io("http://localhost:5000");
 
 const GroupChat = () => {
   const [promptOpen, setPromptOpen] = useState(true);
@@ -18,7 +21,14 @@ const GroupChat = () => {
 
   useEffect(() => {
     socket.on("message", (data) => {
-      setMessages((prevMessages) => [...prevMessages, data.msg]);
+        setMessages((prevMessages) => [
+            ...prevMessages,
+            {
+              message:data.msg,
+              avatar: data.avatar,
+              name: data.user,
+            },
+          ]);
     });
 
     socket.on("update-user-list", (users) => {
@@ -37,12 +47,30 @@ const GroupChat = () => {
 
   const handlePromptSubmit = async (nameOfUser) => {
     try {
-      socket.emit("join-room", nameOfUser);
-      const response = await axios.get("https://groupchat-backend-upox.onrender.com/messages");
-      response.data.forEach((element) => {
-        setMessages((prevMessages) => [...prevMessages, element["message"]]);
-      });
       setPromptOpen(false);
+      const id = toast.loading("loading chat", {
+        position: "top-center",
+        className: "toast-message",
+      });
+      socket.emit("join-room", nameOfUser);
+      const response = await axios.get("http://localhost:5000/messages");
+      response.data.forEach((element) => {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          {
+            message: element["message"],
+            avatar: element["avatar"],
+            name: element["name"],
+          },
+        ]);
+      });
+      toast.update(id, {
+        render: "Chat loaded",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        hideProgressBar: true,
+      });
     } catch (error) {
       console.error("Error fetching messages:", error);
     }
@@ -76,19 +104,26 @@ const GroupChat = () => {
       <div className="group-chat-main-content">
         <div className="group-chat-online-users">
           <h3>Online Users</h3>
+          <hr />
           <ul>
             {onlineUsers.map((user, index) => (
               <li key={index}>
-                {/* <img src={user.avatar} alt="avatar" className="avatar" /> */}
-                {user.name}
+                <img src={user.avatar} alt="avatar" className="avatar" />
+                <span>{user.name}</span>
               </li>
             ))}
           </ul>
         </div>
         <div className="group-chat-chat-section">
           <div className="group-chat-messages">
-            {messages.map((msg, index) => (
-              <ChatBubble key={index} sender={false} message={msg} />
+            {messages.map((el, index) => (
+              <span key={index}>
+                <img src={el.avatar} alt="avatar" className="chat-avatar"/>
+                <ChatBubble
+                  sender={false}
+                  message={el.message}
+                />
+              </span>
             ))}
             <div ref={messagesEndRef} />
           </div>

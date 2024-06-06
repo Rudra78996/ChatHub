@@ -6,6 +6,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-color: black;
 }
 
 #group-chat-heading {
@@ -26,6 +27,7 @@ body {
   justify-content: center;
   flex-direction: row;
   border-radius: 20px;
+  margin-top: 4px;
 }
 
 .groupChat-chat {
@@ -51,23 +53,37 @@ body {
   padding: 10px;
   box-sizing: border-box;
   overflow-y: auto;
-  background-color: #f8f9fa;
+  background-color: #d9d9d9;
   border: 1px solid #cccccc;
   border-radius: 10px; 
   margin-right: 10px; 
+  overflow: scroll;
 }
 
 .group-chat-online-users h3 {
-  margin-top: 0;
+  margin: auto;
 }
 
 .group-chat-online-users ul {
   list-style: none;
   padding: 0;
 }
+.group-chat-online-users::-webkit-scrollbar {
+  display: none;
+}
 
 .group-chat-online-users li {
   padding: 5px 0;
+  border-radius: 10px;
+  border: 2px solid #999999;
+  /* margin: auto; */
+  background-color: #c2c2c2;
+  overflow-y: hidden;
+  margin-bottom: 4px;
+}
+.group-chat-online-users li span{
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .group-chat-chat-section {
@@ -86,9 +102,13 @@ body {
   padding: 10px;
   box-sizing: border-box;
   overflow-y: auto;
-  background-color: #fff;
+  background-color: #202020;
   min-height: 300px; 
-  border-radius: 10px 10px 0 0; 
+  border-radius: 10px 10px 0 0;
+  /* background-image: url("./Images/peakpx.jpg");  */
+}
+.group-chat-messages span{
+  margin-left: 8px;
 }
 
 .group-chat-messages::-webkit-scrollbar {
@@ -110,7 +130,7 @@ body {
   border-top: 1px solid #ccc;
   padding: 10px;
   box-sizing: border-box;
-  background-color: #f1f1f1;
+  background-color: #050505;
   border-radius: 0 0 10px 10px;
 }
 
@@ -131,6 +151,18 @@ body {
   cursor: pointer;
 }
 
+.avatar{
+  border-radius: 50%;
+  height: 50px;  
+  margin-left: 9px;
+  margin-right: 20px;
+  border: 1px solid black; 
+}
+.chat-avatar{
+  border-radius: 50%;
+  height: 44px;  
+  border: 1px solid white; 
+}
 .group-chat-message-input button:hover {
   background-color: #0056b3;
 }
