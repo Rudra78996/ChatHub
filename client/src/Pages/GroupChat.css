@@ -107,7 +107,7 @@ body {
   align-items: flex-start;
   padding: 10px;
   box-sizing: border-box;
-  overflow-y: auto;
+  overflow-y: scroll;
   /* width: 1000px; */
   /* align-self: flex-start; */
   background-color: #202020;
