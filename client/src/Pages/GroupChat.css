@@ -153,6 +153,10 @@ body {
   border-top: 1px solid #ccc;
   padding: 10px;
   box-sizing: border-box;
+  flex-wrap: wrap;
+  align-items: center;
+  /* margin: 10px; */
+  justify-content: center;
   background-color: #050505;
   border-radius: 0 0 10px 10px;
 }
