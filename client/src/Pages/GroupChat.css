@@ -89,6 +89,10 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  /* max-width: 1000px; */
+  /* justify-content: flex-end; */
+  /* justify-content:flex-start; */
+  align-items: stretch;
   min-height: 0;
   border-radius: 10px;
   background-color: #fff;
@@ -97,9 +101,14 @@ body {
 
 .group-chat-messages {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 10px;
   box-sizing: border-box;
   overflow-y: auto;
+  /* width: 1000px; */
+  /* align-self: flex-start; */
   background-color: #202020;
   min-height: 300px;
   border-radius: 10px 10px 0 0;
@@ -186,6 +195,7 @@ body {
   .group-chat-online-users {
     display: none;
   }
+  
 
   .group-chat-chat-section {
     width: 100%;
@@ -204,3 +214,31 @@ body {
 hr{
   color: white;
 }
+#heading{
+    margin-top: 30px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    border: 5px solid rgb(0, 0, 0);
+   border-radius: 30px;
+  }
+#heading1{
+    background-color: black;
+    width: 180px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    border-radius: 20px;
+  }
+  .chat{
+    background-color: black;
+    color: rgb(255, 255, 255);
+  }
+  .hub{
+    background-color: #FF9A00;
+    color: black;
+  }
