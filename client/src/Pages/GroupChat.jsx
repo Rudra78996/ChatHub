@@ -6,7 +6,7 @@ import PromptDialog from "../Components/PromptDialog";
 import { useNavigate } from "react-router-dom";
 import ChatBubble from "../Components/ChatBubble";
 
-const socket = io("http://localhost:5000");
+const socket = io("https://groupchat-backend-upox.onrender.com");
 
 const GroupChat = () => {
   const [promptOpen, setPromptOpen] = useState(true);
@@ -38,7 +38,7 @@ const GroupChat = () => {
   const handlePromptSubmit = async (nameOfUser) => {
     try {
       socket.emit("join-room", nameOfUser);
-      const response = await axios.get("http://localhost:5000/messages");
+      const response = await axios.get("https://groupchat-backend-upox.onrender.com/messages");
       response.data.forEach((element) => {
         setMessages((prevMessages) => [...prevMessages, element["message"]]);
       });
