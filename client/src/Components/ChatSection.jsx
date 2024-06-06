@@ -58,10 +58,10 @@ const ChatSection = ({ matchFound }) => {
           className="fa-regular fa-face-smile"
           style={{
             fontSize:"26px",
-            color:"grey",
             borderRadius:"50%",
             margin:"10px",
-            cursor:"pointer"
+            cursor:"pointer",
+            color:"#ffffff"
           }}
           onClick={() => setShowPicker((val) => !val)}
         ></i>
