@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import ChatBubble from "../Components/ChatBubble";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 //https://groupchat-backend-upox.onrender.com
 const socket = io("https://groupchat-backend-upox.onrender.com");
@@ -92,10 +93,12 @@ const GroupChat = () => {
         onSubmit={handlePromptSubmit}
       />
       <div id="group-chat-heading">
-        <h1 id="group-chat-heading1">
-          <div className="groupChat-chat">Chat</div>
-          <div className="groupChat-hub">Hub</div>
-        </h1>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <h1 id="group-chat-heading1">
+            <div className="groupChat-chat">Chat</div>
+            <div className="groupChat-hub">Hub</div>
+          </h1>
+        </Link>
       </div>
 
       <div className="group-chat-main-content">
