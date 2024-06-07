@@ -12,11 +12,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   justify-content: space-between;
 }
-
 .room-logo {
   font-size: 24px;
   font-weight: bold;
-  margin-left: 2%;
+  margin-left: 18px;
 }
 .room-leave-btn {
   margin-right: 2%;

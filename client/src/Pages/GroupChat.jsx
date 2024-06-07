@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 
-//https://groupchat-backend-upox.onrender.com
 const socket = io("https://groupchat-backend-upox.onrender.com");
 
 const GroupChat = () => {
@@ -18,6 +17,7 @@ const GroupChat = () => {
   const [message, setMessage] = useState("");
   const [onlineUsers, setOnlineUsers] = useState([]);
   const navigate = useNavigate();
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     socket.on("message", (data) => {
@@ -41,10 +41,16 @@ const GroupChat = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
   const handlePromptSubmit = async (nameOfUser) => {
     try {
       setPromptOpen(false);
-      const id = toast.loading("loading chat", {
+      const id = toast.loading("Loading chat...", {
         position: "top-center",
         className: "toast-message",
       });
@@ -123,6 +129,7 @@ const GroupChat = () => {
                 <ChatBubble sender={false} message={el.message} />
               </span>
             ))}
+            <div ref={messagesEndRef} />
           </div>
           <div className="group-chat-message-input">
             <input
