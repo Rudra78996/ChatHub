@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  overflow: auto;
 }
 
 .group-chat {
@@ -8,6 +9,7 @@ body {
   height: 100vh;
   background-color: black;
   overflow: hidden;
+  min-height:600px ;
 }
 
 #group-chat-heading {
@@ -35,6 +37,7 @@ body {
 .groupChat-chat {
   background-color: black;
   color: white;
+  /* min-height:400px ; */
 }
 
 .groupChat-hub {
@@ -189,7 +192,24 @@ body {
 
 @media (max-width: 780px) {
   .group-chat-online-users {
-    display: none;
+    min-width: 250px;
+    /* height: 300px; */
+  }
+  .group-chat-chat-section{
+    min-height: 450px;
+  }
+  .group-chat-main-content {
+    display: flex;
+
+    flex-direction: column-reverse;
+    flex: 1;
+    overflow: auto;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .group-chat-online-users{
+    margin-top: 90px;
+    min-height: 350px
   }
 
   .group-chat-chat-section {
