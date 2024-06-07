@@ -125,4 +125,9 @@ body{
   background-color: #FF9A00;
   color: black;
 }
-
+.randomChat-messages{
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+ 
+}
