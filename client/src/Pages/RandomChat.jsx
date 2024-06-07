@@ -158,6 +158,7 @@ const RandomChat = () => {
                 </div>
                 <div className="randomChat-input-container">
                     <i
+                         id="emj"
                         className="fa-regular fa-face-smile"
                         style={{
                             fontSize: "26px",
@@ -182,6 +183,7 @@ const RandomChat = () => {
                         onKeyPress={(e) => e.key === "Enter" && sendMessage()}
                     />
                     <button
+                        id="btn"
                         className="btn btn-primary"
                         onClick={sendMessage}
                         disabled={!foundMatch}
