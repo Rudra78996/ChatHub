@@ -185,3 +185,18 @@ html, body {
   background-color: #e0e0e0;
   color: black;
 }
+
+@media (max-width: 400px){
+  #emj{
+    display: none;
+  }
+  
+  
+}
+@media (max-width:344px){
+  #btn{
+    margin-top: 20px;
+  }
+}
+
+
