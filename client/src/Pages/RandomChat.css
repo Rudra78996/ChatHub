@@ -144,7 +144,7 @@ html, body {
   .randomChat-chat-container {
       justify-content: space-evenly;
       margin-top: 70px;
-      transform: translateY(-20px);
+      transform: translateY(-30px);
   }
   .randomChat-input-container {
       flex-direction: row;
