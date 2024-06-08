@@ -17,5 +17,5 @@ ChatHub is a platform where strangers can connect with each other via video and 
 - **Database**: MongoDB
 
 ## 🌐 Live Demo
-  Check out the live demo of ChatHub <a href="https://chat-hub-one.vercel.app/">here</a>! 
+   Check out the live demo of ChatHub <a href="https://chat-hub-one.vercel.app/">here</a>! 
       
