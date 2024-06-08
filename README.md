@@ -2,9 +2,6 @@
 
 ChatHub is a platform where strangers can connect with each other via video and chat. Additionally, users can join community chats to engage in group conversations. The application is built using WebRTC for real-time video communication, React.js for the front-end, Node.js for the back-end, and Socket.IO for real-time messaging. MongoDB is used for database management.
 
-![ChatHub Animation](https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif)
-
-
 ## ✨ Features
 
 - 📹 **Video Chat**: Connect with strangers via real-time video communication.
