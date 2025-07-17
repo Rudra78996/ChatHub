@@ -9,7 +9,7 @@ function Home() {
     <div className="container">
       <header>
         <div id="heading">
-          <Link to="/" style={{ textDecoration: "none"}}>
+          <Link to="/" style={{ textDecoration: "none" }}>
             <h1 id="heading1">
               <div className="chat">Chat</div>
               <div className="hub">Hub</div>
@@ -66,6 +66,10 @@ function Home() {
           Read Community Guidelines
         </a>
       </main>
+      <div
+        id="ad-container"
+        style={{ textAlign: "center", marginTop: "40px" }}
+      ></div>
     </div>
   );
 }
